@@ -36,6 +36,7 @@ def main():
 					print("" + letter.upper(), end = '')
 			attempt = attempt + 1
 
+	#print("OK")
 	
 
 if __name__ == '__main__':
