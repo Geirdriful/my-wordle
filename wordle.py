@@ -9,15 +9,13 @@ def main():
 	number = random.randint(0, len(word_list))
 	word_of_the_day = word_list[number]
 	print("Selection d'un mot de 5 lettres ...")
-	# print("\033[0;33;40m " + word_of_the_day, "\033[0m")
-	print(word_of_the_day)
 
 	letter_of_the_day_list = list()
 	for index in range(0, len(word_of_the_day)):
 		letter_of_the_day_list.append(word_of_the_day[index])
 	
 	word_player = ""
-	attempt = 1
+	attempt = 1 
 
 	while word_player.upper() != word_of_the_day and attempt < 7:
 		word_player = input("\nProposition ? ")
@@ -35,9 +33,6 @@ def main():
 				else:
 					print("" + letter.upper(), end = '')
 			attempt = attempt + 1
-
-	#print("OK")
-	
 
 if __name__ == '__main__':
 	main()

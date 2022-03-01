@@ -2,6 +2,7 @@
 
 # File with alll utils functions for wordle 
 
+# Open file named 'filename' and read its content 
 def open_file_and_read(filename = None):
 	
 	word_list = list()
