@@ -11,7 +11,7 @@ Mise en couleur des lettres:
  - gris --> lettre non présente dans le mot
 
 Roadmap
- - 1 mot par jour : définir comment avoir tjr le même mot même en relancant l'instance de jeu
+ - 1 mot par jour : définir comment avoir tjr le même mot même en relancant l'instance de jeu --> pris en charge par Valentin
 
 Exécute
  - ./wordle.py
