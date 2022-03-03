@@ -15,8 +15,7 @@ def main():
 	word_list = utils.open_file_and_read('mots.txt')
 
 	number = random.randint(0, len(word_list))
-	# word_of_the_day = word_list[number]
-	word_of_the_day = 'FRENE'
+	word_of_the_day = word_list[number]
 	print("Selection d'un mot de 5 lettres ...")
 	for index in range(0, len(word_of_the_day)):
 		list_letter_of_the_day.append(word_of_the_day[index])
