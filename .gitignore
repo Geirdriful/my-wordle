@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 my-wordle/test.py
+notes.txt
 
 # C extensions
 *.so
