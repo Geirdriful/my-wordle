@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-/home/Cédric/Projet_Wordle/my-wordle/test.py
+my-wordle/test.py
 
 # C extensions
 *.so
