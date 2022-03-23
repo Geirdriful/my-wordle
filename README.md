@@ -1,16 +1,19 @@
 # My-Wordle
 
-Développement d'un wordle similaire à https://wordle.louan.me/ sur une vm Debian 8 server.
-Le principe reste le même : selection d'un mot de 5 lettres. 6 essais pour trouver le mot. 
+Développement d'un wordle similaire à https://wordle.louan.me/ sur une vm Debian 8 server. 
+
+Le principe reste le même : selection d'un mot de 5 lettres. 6 essais pour trouver le mot.
+
 Si dans le mot proposé, une lettre est à la bonne place elle s'affiche en verte
+
 Si dans le mot proposé, une lettre est présente dans le mot a deviné mais pas à la bonne place elle s'affiche en orange
 
 ## Build status
 
-23/03/2022 : jeu fonctionnel en ligne de commande sur
+23/03/2022 : jeu fonctionnel en ligne de commande
 
 roadmap :
-- ajouter une interface graphique (a voir car la VM de dev est une version sans interface)
+- ajouter une interface graphique (à voir car la VM de dev est une version sans interface)
 - se baser sur l'api de DICOLINK pour choisir un mot
 - blocage à un mot par jour
 - augmenter la difficulté en augmentant la longueur du mot du jour
@@ -28,7 +31,6 @@ roadmap :
 
 ## Captures d’écrans du projet
 
-Ajouter quelques captures d’écran pour montrer à quoi ressemble le projet. Eventuellement faire une courte vidéo (2 minutes maximum) pour montrer quelques cas d’usages.
 CAPTURE ECRAN A AJOUTER
 
 ## Getting Started
@@ -46,22 +48,22 @@ Les instructions à suivre pour récupérer une version du projet et le faire to
  
 ### Installation
 
-Je developpe sur une VM distante en passant par VisualStudioCode depuis Windows10
+Je developpe sur une VM distante en passant par VisualStudioCode depuis Windows 10. Cette installation portera sur un environnement de developpement similaire.
 
 Etape 1:
-Une fois la VM déployé, installer Python3 en suivant la section Pré-requis
+Si vous n'avez pas déjà Python3, installez le en suivant la section Pré-requis.
 
 Etape 2:
-Suite à cela, vous pouvez installer VisualStudioCode sur votre machine w10.
+Si cela n'est pas déjà fait, vous pouvez installer VisualStudioCode sur votre machine Windows 10 (ou tout autre IDE).
 
 Etape 3:
-Connectez vous avec VSC sur la VM précédement déployé puis entrez la commande suivante :
+Connectez vous avec VSC (ou avec un autre IDE) sur la VM configurée précédement puis entrez la commande suivante afin de lancer le téléchargement du projet :
 ```
-VOIR COMMANDE git A TESTER
+Voir commande git a tester pour DL le projet
 ```
 
 Etape 4:
-Une fois le téléchargement du projet terminé, déplacer vous dans le répertoire du projet puis lancez la commande suivante pour exécuter le jeu :
+Une fois le téléchargement du projet terminé, déplacez vous dans le répertoire du projet puis lancez la commande suivante pour exécuter le jeu :
 ```
 ./wordle.py
 ```
@@ -86,11 +88,12 @@ Comment déployer sur un environnement
 
 ## Documentations externes
 
-Ajouter doc DICOLINK pour utilisation API
+Ajouter doc DICOLINK pour utilisation API (https://www.dicolink.com/)
+
 Si nécessaire, ajouter des informations ou des liens vers les documentations externes. Cela peut être un lien vers la documentation applicative, un lien vers la documentation de webservices utilisés, etc.
 
 ## Contribuer
-
+Détailler le workflow centralisé
 Un lien vers la documentation permettant de contribuer au projet, comment soumettre une pull request, une anomalie, etc.
 
 ### Code style
