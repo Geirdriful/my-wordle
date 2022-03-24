@@ -31,7 +31,7 @@ roadmap :
 
 ## Captures d’écrans du projet
 
-CAPTURE ECRAN A AJOUTER
+![image](https://user-images.githubusercontent.com/66006065/159879682-93925fb2-3c95-4f82-b62a-0f410c0a601c.png)
 
 ## Getting Started
 
@@ -59,7 +59,7 @@ Si cela n'est pas déjà fait, vous pouvez installer VisualStudioCode sur votre 
 Etape 3:
 Connectez vous avec VSC (ou avec un autre IDE) sur la VM configurée précédement puis entrez la commande suivante afin de lancer le téléchargement du projet :
 ```
-Voir commande git a tester pour DL le projet
+git pull git@github.com:Geirdriful/my-wordle.git
 ```
 
 Etape 4:
@@ -70,7 +70,7 @@ Une fois le téléchargement du projet terminé, déplacez vous dans le réperto
 
 Etape 5:
 Si tout est OK, vous devriez avoir quelque chose qui ressemble à cela :
-CAPTURE ECRAN
+![image](https://user-images.githubusercontent.com/66006065/159884868-94b5250e-22b5-431b-9b25-63a195a1169d.png)
 
 """
 ### Tests coding style
@@ -90,22 +90,13 @@ Comment déployer sur un environnement
 
 Ajouter doc DICOLINK pour utilisation API (https://www.dicolink.com/)
 
-Si nécessaire, ajouter des informations ou des liens vers les documentations externes. Cela peut être un lien vers la documentation applicative, un lien vers la documentation de webservices utilisés, etc.
-
 ## Contribuer
-Détailler le workflow centralisé
-Un lien vers la documentation permettant de contribuer au projet, comment soumettre une pull request, une anomalie, etc.
+Fonctionne sur le principe de workflow centralisé
 
-### Code style
 
-Donner les informations pour répondre aux standards de code
-
-## Versioning
-
-Indiquer la méthode de versioning, SemVer de préférence. 
-
-## License
-
-Indiquer la licence du projet s’il y en a une et/ou les éléments légaux
-
+- Chaque contributeur clone le projet en local (pour avoir la dernière version du projet) - git clone
+- Dev d'une nouvelle fonctionnalité en local - git add / git commit
+- Pull de la dernière version du projet (au cas ou il y ai eu des nouvelles fonctionnalités) - git pull
+- Résolution des conflits si besoin
+- Push de la nouvelle fonctionnalité - git push
 
