@@ -70,7 +70,9 @@ Une fois le téléchargement du projet terminé, déplacez vous dans le réperto
 
 Etape 5:
 Si tout est OK, vous devriez avoir quelque chose qui ressemble à cela :
+
 ![image](https://user-images.githubusercontent.com/66006065/159884868-94b5250e-22b5-431b-9b25-63a195a1169d.png)
+
 
 """
 ### Tests coding style
@@ -92,7 +94,6 @@ Ajouter doc DICOLINK pour utilisation API (https://www.dicolink.com/)
 
 ## Contribuer
 Fonctionne sur le principe de workflow centralisé
-
 
 - Chaque contributeur clone le projet en local (pour avoir la dernière version du projet) - git clone
 - Dev d'une nouvelle fonctionnalité en local - git add / git commit
