@@ -12,12 +12,13 @@ def main():
 	attempt = 0
 
 	''' Selection d'un mot parmi la liste '''
-	word_list = utils.open_file_and_read('mots.txt')
+	word_of_the_day = utils.get_word_of_the_day()
+	# word_list = utils.open_file_and_read('mots.txt')
 
-	number = random.randint(0, len(word_list))
-	word_of_the_day = word_list[number]
+	# number = random.randint(0, len(word_list))
+	# word_of_the_day = word_list[number]
 	
-	print("Selection d'un mot de 5 lettres ...")
+	print("Selection d'un mot de " + str(len(word_of_the_day)) + " lettres ...")
 	for index in range(0, len(word_of_the_day)):
 		list_letter_of_the_day.append(word_of_the_day[index])
 	
@@ -25,7 +26,8 @@ def main():
 	while word_player.upper() != word_of_the_day and attempt < 6 :
 		''' Entrée clavier par le joueur '''
 		word_player = input("\nProposition ? ")
-		while word_player.upper() not in word_list:
+		# while word_player.upper() not in word_list:
+		while utils.search_player_word(word_player) == 400:
 			print("le mot '", word_player,"' n'est pas un mot valide")
 			word_player = input("\nProposition ? ")
 

@@ -1,5 +1,7 @@
 #! /usr/bin/env python3
 import requests
+import json
+from datetime import date
 
 # File with alll utils functions for wordle 
 
@@ -52,9 +54,35 @@ def orange_letters(list_wotd, list_player_word):
 ''' using dicolink API, fetch word of the day (based on date of today)
  https://api.dicolink.com/v1/mots/motdujour?date=2020-06-04&api_key=VOTRECLEFAPI '''
 def get_word_of_the_day():
-	print("ok")
+
+	today = date.today()
+	header = {
+		'Content-Type': 'application/json'
+	}
+	url = "https://api.dicolink.com/v1/mots/motdujour?date="+str(today)+"&api_key=ANvGBoV1-G7Ioi4SIix_dXPzV1y1gCDD"
+
+	response = requests.get(url, headers=header)
+	response_json = json.loads(response.text)
+
+	print(response_json['mot'])
+	return response_json['mot'].upper()
 
 ''' using dicolink API, fetch if the player word exists in the french dictionnary 
  https://api.dicolink.com/v1/mot/cheval/definitions?limite=200&api_key=VOTRECLEFAPI '''
-def search_player_word():
-	print("ok")
+def search_player_word(word):
+	
+	header = {
+		'Content-Type': 'application/json'
+	}
+	url = "https://api.dicolink.com/v1/mot/"+ str(word) +"/definitions?limite=200&api_key=ANvGBoV1-G7Ioi4SIix_dXPzV1y1gCDD"
+
+	response = requests.get(url, headers=header)
+	response_json = json.loads(response.text)
+	
+	if len(response_json) != 1:
+		return 200
+	else:
+		return 400
+	
+
+	print(response_json)
