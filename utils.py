@@ -78,7 +78,7 @@ def search_player_word(word):
 
 	response = requests.get(url, headers=header)
 	response_json = json.loads(response.text)
-	
+
 	if len(response_json) != 1:
 		return 200
 	else:
