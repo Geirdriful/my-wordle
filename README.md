@@ -74,20 +74,6 @@ Si tout est OK, vous devriez avoir quelque chose qui ressemble à cela :
 ![image](https://user-images.githubusercontent.com/66006065/159884868-94b5250e-22b5-431b-9b25-63a195a1169d.png)
 
 
-"""
-### Tests coding style
-
-Expliquer les standards de code pour les tests
-
-## Build
-
-Comment builder le projet et lancer la chaîne CI
-
-## Déploiement
-
-Comment déployer sur un environnement
-"""
-
 ## Documentations externes
 
 Ajouter doc DICOLINK pour utilisation API (https://www.dicolink.com/)
