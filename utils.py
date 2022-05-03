@@ -3,18 +3,6 @@ import requests
 import json
 from datetime import date
 
-# File with alll utils functions for wordle 
-
-''' Ouvre le fichier 'filename' et lis son contenu '''
-def open_file_and_read(filename):
-	
-	word_list = list()
-	file = open(filename, 'r')
-	for row in file:
-		word_list.append(row[:5])
-
-	return word_list
-
 ''' Detection des lettres vertes. Ces lettres sont presentes dans le WOTD et sont a la bonne place'''
 def green_letters(list_wotd, list_player_word):
 
@@ -63,7 +51,6 @@ def get_word_of_the_day():
 	response = requests.get(url, headers=header)
 	response_json = json.loads(response.text)
 
-	print(response_json['mot'])
 	return response_json['mot'].upper()
 
 ''' Trouve si le mot du joueur existe dans le dictionnaire francais. Si oui, le mot est valide, si non il est invalide 
@@ -79,8 +66,13 @@ def search_player_word(word):
 	response_json = json.loads(response.text)
 
 	if len(response_json) != 1:
-		return 200
+		return True
 	else:
-		return 400
-	
-	print(response_json)
+		return False
+
+def find_word_of_the_day(word_player, word_of_the_day):
+	if word_player.upper() == word_of_the_day:
+		print("\033[0;32;40m" + word_of_the_day + "\033[0m")
+		exit("Bravo")
+	else:
+		return False

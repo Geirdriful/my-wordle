@@ -19,14 +19,15 @@ def main():
 	# word_of_the_day = word_list[number]
 	
 	print("Selection d'un mot de " + str(len(word_of_the_day)) + " lettres ...")
-	for index in range(0, len(word_of_the_day)):
-		list_letter_of_the_day.append(word_of_the_day[index])
+	list_letter_of_the_day = [char for char in word_of_the_day]
+	# for index in range(0, len(word_of_the_day)):
+	# 	list_letter_of_the_day.append(word_of_the_day[index])
 	
 	''' tant que le joueur n'a pas trouvé et qu'il n'a pas fait 6 tentatives '''
 	while word_player.upper() != word_of_the_day and attempt < 6 :
 		''' Entrée clavier par le joueur '''
 		word_player = input("\nProposition ? ")
-
+		
 		player_word_exists = utils.search_player_word(word_player)
 		while player_word_exists == 400 or len(word_of_the_day) != len(word_player):
 			if player_word_exists == 400:
@@ -37,11 +38,8 @@ def main():
 			player_word_exists = utils.search_player_word(word_player)
 
 		
-		''' Bingo, c'est le mot du jour'''
-		if word_player.upper() == word_of_the_day:
-			print("\033[0;32;40m" + word_of_the_day + "\033[0m")
-			exit("Bravo")
-		else:
+		''' Si ce n'est pas le mot du jour, il faut chercher les lettres oranges/vertes'''
+		if not utils.find_word_of_the_day(word_player, word_of_the_day):
 			''' Découpage du mot du joueur et ajout dans une liste '''
 			list_letter_of_the_player = list()
 			for index in range(0, len(word_of_the_day)):
@@ -70,7 +68,7 @@ def main():
 					print("\033[0;33;40m" + word_player[l].upper() + "\033[0m", end ='')
 				else:
 					print("" + word_player[l].upper(), end = '')
-		attempt = attempt + 1
+			attempt = attempt + 1
 	
 	''' Fin de partie '''
 	if attempt == 6:
