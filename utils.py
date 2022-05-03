@@ -5,7 +5,7 @@ from datetime import date
 
 # File with alll utils functions for wordle 
 
-''' Open file named 'filename' and read its content '''
+''' Ouvre le fichier 'filename' et lis son contenu '''
 def open_file_and_read(filename):
 	
 	word_list = list()
@@ -15,7 +15,7 @@ def open_file_and_read(filename):
 
 	return word_list
 
-''' Detection of green letters. Those letters exists on the WOTD and they are at the good place'''
+''' Detection des lettres vertes. Ces lettres sont presentes dans le WOTD et sont a la bonne place'''
 def green_letters(list_wotd, list_player_word):
 
 	list_return = list()
@@ -26,7 +26,7 @@ def green_letters(list_wotd, list_player_word):
 
 	return list_return
 
-''' Detection of orange letters. Those letters exists on the WOTD but they are not at the good place'''
+''' Detection des lettres oranges. Ces lettres sont presente dans le WOTD mais ne sont pas a la bonne place'''
 def orange_letters(list_wotd, list_player_word):
 
 	list_return = list()
@@ -38,10 +38,10 @@ def orange_letters(list_wotd, list_player_word):
 				count_wotd = list_wotd.count(list_wotd[index_wotd])
 				count_player_word = list_player_word.count(list_player_word[index_player_word])
 			
-				''' If list_player_word contains more than one occurence of the same letter whereas list_wotd not, then only one letter 
-				are colored in orange
-				If list_word contains more than one occurence of the same letter whereas list_player_word not, then only one letter 
-				are colored in orange '''
+				''' Si list_player_word contient plus qu'une occurence de la meme lettre alors que list_wotd non, alors seulement une seule lettre
+				est affichee en orange
+				Si list_wotd contient plus d'une occurrence de la meme lettre tandis que list_player_word non, alors seulement une seule
+				lettre est affichee en orange'''
 				
 				if count_player_word >= count_wotd and already_done == False:
 					already_done = True
@@ -51,8 +51,7 @@ def orange_letters(list_wotd, list_player_word):
 				
 	return list_return
 
-''' using dicolink API, fetch word of the day (based on date of today)
- https://api.dicolink.com/v1/mots/motdujour?date=2020-06-04&api_key=VOTRECLEFAPI '''
+''' Recupere le mot du jour en utilisant sur l'api de dicolink (En se basant sur la date du jour)'''
 def get_word_of_the_day():
 
 	today = date.today()
@@ -67,8 +66,8 @@ def get_word_of_the_day():
 	print(response_json['mot'])
 	return response_json['mot'].upper()
 
-''' using dicolink API, fetch if the player word exists in the french dictionnary 
- https://api.dicolink.com/v1/mot/cheval/definitions?limite=200&api_key=VOTRECLEFAPI '''
+''' Trouve si le mot du joueur existe dans le dictionnaire francais. Si oui, le mot est valide, si non il est invalide 
+	Utilise l'api de dicolink '''
 def search_player_word(word):
 	
 	header = {
@@ -84,5 +83,4 @@ def search_player_word(word):
 	else:
 		return 400
 	
-
 	print(response_json)
