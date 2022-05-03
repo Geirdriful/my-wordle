@@ -2,7 +2,7 @@
 
 Développement d'un wordle similaire à https://wordle.louan.me/ sur une vm Debian 8 server. 
 
-Le principe reste le même : selection d'un mot de 5 lettres. 6 essais pour trouver le mot.
+Le principe reste le même : selection d'un mot de X lettres. 6 essais pour trouver le mot. La longueur du mot dépend du retour de la fonction get_word_of_the_day() basé sur l'API dicolink
 
 Si dans le mot proposé, une lettre est à la bonne place elle s'affiche en verte
 
@@ -14,17 +14,15 @@ Si dans le mot proposé, une lettre est présente dans le mot a deviné mais pas
 
 roadmap :
 - ajouter une interface graphique (à voir car la VM de dev est une version sans interface)
-- se baser sur l'api de DICOLINK pour choisir un mot
-- blocage à un mot par jour
-- augmenter la difficulté en augmentant la longueur du mot du jour
+- ~~se baser sur l'api de DICOLINK pour choisir un mot~~
+- ~~blocage à un mot par jour~~
+- ~~augmenter la difficulté en augmentant la longueur du mot du jour~~
+- faire une version avec plus qu'un mot par jour
 
 ## Sommaire
 
 * [Captures d’écrans du projet](#Captures-décrans-du-projet)
 * [Getting Started](#Getting-Started)
-* [Tests](#Tests)
-* [Build](#Build)
-* [Déploiement](#Déploiement)
 * [Documentations externes](#Documentations-externes)
 * [Contribuer](#Contribuer)
 * [Versioning](#Versioning)
@@ -73,20 +71,6 @@ Si tout est OK, vous devriez avoir quelque chose qui ressemble à cela :
 
 ![image](https://user-images.githubusercontent.com/66006065/159884868-94b5250e-22b5-431b-9b25-63a195a1169d.png)
 
-
-"""
-### Tests coding style
-
-Expliquer les standards de code pour les tests
-
-## Build
-
-Comment builder le projet et lancer la chaîne CI
-
-## Déploiement
-
-Comment déployer sur un environnement
-"""
 
 ## Documentations externes
 
