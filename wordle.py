@@ -69,6 +69,9 @@ def main():
 				else:
 					print("" + word_player[l].upper(), end = '')
 			attempt = attempt + 1
+		else:
+			print("\033[0;32;40m" + word_of_the_day + "\033[0m")
+			exit("Bravo")
 	
 	''' Fin de partie '''
 	if attempt == 6:

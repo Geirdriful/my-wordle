@@ -72,7 +72,6 @@ def search_player_word(word):
 
 def find_word_of_the_day(word_player, word_of_the_day):
 	if word_player.upper() == word_of_the_day:
-		print("\033[0;32;40m" + word_of_the_day + "\033[0m")
-		exit("Bravo")
+		return True
 	else:
 		return False
