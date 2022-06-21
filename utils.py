@@ -74,4 +74,4 @@ def find_word_of_the_day(word_player, word_of_the_day):
 	if word_player.upper() == word_of_the_day:
 		return True
 	else:
-		return False
+		return False 
