@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 import utils
 import random
+import sys
 
 def main():
 
@@ -15,8 +16,7 @@ def main():
 	try:
 		word_of_the_day = utils.get_word_of_the_day()
 	except KeyError:
-		print('Selection du mot impaaaawsible')
-		exit(1)
+		sys.exit('Selection du mot impaaaawsible')
 
 	# number = random.randint(0, len(word_list))
 	# word_of_the_day = word_list[number]
@@ -30,17 +30,28 @@ def main():
 		try:
 			word_player = input("\nProposition ? ")
 		except KeyboardInterrupt:
-			print('Interruption clavier')
-			exit(2)
-		
-		player_word_exists = utils.search_player_word(word_player)
-		while player_word_exists == 400 or len(word_of_the_day) != len(word_player):
-			if player_word_exists == 400:
+			sys.exit(' Interruption clavier')
+		try:
+			player_word_exists = utils.search_player_word(word_player)
+		except ValueError:
+			sys.exit('Un ou plusieurs caractere(s) inconnus')
+
+		while len(player_word_exists) <= 4 or len(word_of_the_day) != len(word_player):
+			if len(player_word_exists) == 1:
 				print("le mot '", word_player,"' n'est pas un mot valide")
+			elif len(player_word_exists) == 4:
+				print("Erreur d'authentification")
 			else:
 				print('Merci de faire une proposition de',str(len(word_of_the_day)),'lettres')
-			word_player = input("\nProposition ? ")
-			player_word_exists = utils.search_player_word(word_player)
+			try:
+				word_player = input("\nProposition ? ")
+			except KeyboardInterrupt:
+				sys.exit('Interruption clavier')
+
+			try:
+				player_word_exists = utils.search_player_word(word_player)
+			except KeyError:
+				sys.exit('Erreur lors de la recherche du mot')
 
 		
 		''' Si ce n'est pas le mot du jour, il faut chercher les lettres oranges/vertes'''
@@ -76,7 +87,7 @@ def main():
 			attempt = attempt + 1
 		else:
 			print("\033[0;32;40m" + word_of_the_day + "\033[0m")
-			exit("Bravo")
+			sys.exit("Bravo")
 	
 	''' Fin de partie '''
 	if attempt == 6:
