@@ -12,21 +12,26 @@ def main():
 	attempt = 0
 
 	''' Selection d'un mot parmi la liste '''
-	word_of_the_day = utils.get_word_of_the_day()
-	# word_list = utils.open_file_and_read('mots.txt')
+	try:
+		word_of_the_day = utils.get_word_of_the_day()
+	except KeyError:
+		print('Selection du mot impaaaawsible')
+		exit(1)
 
 	# number = random.randint(0, len(word_list))
 	# word_of_the_day = word_list[number]
 	
 	print("Selection d'un mot de " + str(len(word_of_the_day)) + " lettres ...")
 	list_letter_of_the_day = [char for char in word_of_the_day]
-	# for index in range(0, len(word_of_the_day)):
-	# 	list_letter_of_the_day.append(word_of_the_day[index])
 	
 	''' tant que le joueur n'a pas trouvé et qu'il n'a pas fait 6 tentatives '''
 	while word_player.upper() != word_of_the_day and attempt < 6 :
 		''' Entrée clavier par le joueur '''
-		word_player = input("\nProposition ? ")
+		try:
+			word_player = input("\nProposition ? ")
+		except KeyboardInterrupt:
+			print('Interruption clavier')
+			exit(2)
 		
 		player_word_exists = utils.search_player_word(word_player)
 		while player_word_exists == 400 or len(word_of_the_day) != len(word_player):

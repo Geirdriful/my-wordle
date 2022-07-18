@@ -50,7 +50,6 @@ def get_word_of_the_day():
 
 	response = requests.get(url, headers=header)
 	response_json = json.loads(response.text)
-
 	return response_json['mot'].upper()
 
 ''' Trouve si le mot du joueur existe dans le dictionnaire francais. Si oui, le mot est valide, si non il est invalide 
