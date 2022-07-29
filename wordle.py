@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 import utils
+import service_api
 import random
 import sys
 
@@ -12,9 +13,11 @@ def main():
 	word_player = ""
 	attempt = 0
 
+	service = service_api.ServiceAPI()
+
 	''' Selection d'un mot parmi la liste '''
 	try:
-		word_of_the_day = utils.get_word_of_the_day()
+		word_of_the_day = service.get_word_of_the_day()
 	except KeyError:
 		sys.exit('Selection du mot impaaaawsible')
 
@@ -32,15 +35,15 @@ def main():
 		except KeyboardInterrupt:
 			sys.exit(' Interruption clavier')
 		try:
-			player_word_exists = utils.search_player_word(word_player)
+			player_word_exists = service.is_valid(word_player)
 		except ValueError:
 			sys.exit('Un ou plusieurs caractere(s) inconnus')
+		except Exception:
+			sys.exit("error a definir")
 
-		while len(player_word_exists) <= 4 or len(word_of_the_day) != len(word_player):
-			if len(player_word_exists) == 1:
+		while player_word_exists == False or len(word_of_the_day) != len(word_player):
+			if player_word_exists == False:
 				print("le mot '", word_player,"' n'est pas un mot valide")
-			elif len(player_word_exists) == 4:
-				print("Erreur d'authentification")
 			else:
 				print('Merci de faire une proposition de',str(len(word_of_the_day)),'lettres')
 			try:
@@ -49,7 +52,7 @@ def main():
 				sys.exit('Interruption clavier')
 
 			try:
-				player_word_exists = utils.search_player_word(word_player)
+				player_word_exists = service.is_valid(word_player)
 			except KeyError:
 				sys.exit('Erreur lors de la recherche du mot')
 

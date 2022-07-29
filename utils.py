@@ -39,34 +39,6 @@ def orange_letters(list_wotd, list_player_word):
 				
 	return list_return
 
-''' Recupere le mot du jour en utilisant sur l'api de dicolink (En se basant sur la date du jour)'''
-def get_word_of_the_day():
-
-	today = date.today()
-	header = {
-		'Content-Type': 'application/json'
-	}
-	url = "https://api.dicolink.com/v1/mots/motdujour?date="+str(today)+"&api_key=ANvGBoV1-G7Ioi4SIix_dXPzV1y1gCDD"
-
-	response = requests.get(url, headers=header)
-	response_json = json.loads(response.text)
-
-	return response_json['mot'].upper()
-
-''' Trouve si le mot du joueur existe dans le dictionnaire francais. Si oui, le mot est valide, si non il est invalide 
-	Utilise l'api de dicolink '''
-def search_player_word(word):
-	
-	header = {
-		'Content-Type': 'application/json'
-	}
-	url = "https://api.dicolink.com/v1/mot/"+ str(word) +"/definitions?limite=200&api_key=ANvGBoV1-G7Ioi4SIix_dXPzV1y1gCDD"
-
-	response = requests.get(url, headers=header)
-	response_json = json.loads(response.text)
-
-	return(response_json)
-
 def find_word_of_the_day(word_player, word_of_the_day):
 	if word_player.upper() == word_of_the_day:
 		return True
