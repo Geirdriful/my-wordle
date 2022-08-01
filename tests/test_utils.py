@@ -27,12 +27,11 @@ class TestUtilsBasicCases(unittest.TestCase):
 	def test_given_an_existing_word_when_checking_word_validity_then_should_be_OK(self):
 		self.assertTrue(self.service.is_valid('bonjour'))
 
-	def test_given_the_real_word_of_the_day_when_checking_wprd_of_the_day_then_should_be_OK(self):
+	def test_given_the_real_word_of_the_day_when_checking_word_of_the_day_then_should_be_OK(self):
 
 		self.assertTrue(utils.find_word_of_the_day(self.wotd, self.wotd))
 	
-	''' Test le retour de green_letters (liste contenant les index des lettres a la bonne place)'''
-	def test_green_letter(self):
+	def test_given_the_real_wotd_when_checking_if_the_letters_are_the_same_with_wotd(self):
 		
 		l = [var for var in range(0, len(self.wotd))]
 		self.assertEqual(l, utils.green_letters(self.wotd, self.wotd))
@@ -41,7 +40,7 @@ class TestUtilsBasicCases(unittest.TestCase):
 	def test_orange_letter(self):
 
 		l = [var for var in range(0, len(self.wotd))]
-		self.assertEqual(l, utils.green_letters(self.wotd, self.wotd))
+		self.assertEqual(l, utils.orange_letters(self.wotd, self.wotd))
 
 
 class TestUtilsErrorCases(unittest.TestCase):
@@ -62,9 +61,14 @@ class TestUtilsErrorCases(unittest.TestCase):
 	def test_given_a_wrong_word_when_checking_word_validity_then_should_be_KO(self):
 		self.assertFalse(self.service.is_valid('bonjourr'))
 
-	def test_given_a_wrong_word_of_the_day_when_checking_wprd_of_the_day_then_should_be_OK(self):
+	def test_given_a_wrong_word_of_the_day_when_checking_word_of_the_day_then_should_be_OK(self):
 
 		self.assertFalse(utils.find_word_of_the_day('aaaa', self.wotd))
+	
+	def test_given_a_wrong_wotd_when_checking_if_the_letters_are_the_same_with_wotd(self):
+		
+		l = [var for var in range(0, len(self.wotd))]
+		self.assertNotEqual('aabbccdd', utils.green_letters(self.wotd, self.wotd))
 
 
 if __name__ == '__main__':
