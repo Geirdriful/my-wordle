@@ -27,12 +27,9 @@ class TestUtilsBasicCases(unittest.TestCase):
 	def test_given_an_existing_word_when_checking_word_validity_then_should_be_OK(self):
 		self.assertTrue(self.service.is_valid('bonjour'))
 
-	''' Test si le mot du joueur est le mot du jour '''
-	def test_find_word_of_the_day(self):
+	def test_given_the_real_word_of_the_day_when_checking_wprd_of_the_day_then_should_be_OK(self):
 
-		# warnings.simplefilter("ignore", ResourceWarning)
 		self.assertTrue(utils.find_word_of_the_day(self.wotd, self.wotd))
-		self.assertFalse(utils.find_word_of_the_day('aaaa', self.wotd))
 	
 	''' Test le retour de green_letters (liste contenant les index des lettres a la bonne place)'''
 	def test_green_letter(self):
@@ -65,7 +62,9 @@ class TestUtilsErrorCases(unittest.TestCase):
 	def test_given_a_wrong_word_when_checking_word_validity_then_should_be_KO(self):
 		self.assertFalse(self.service.is_valid('bonjourr'))
 
+	def test_given_a_wrong_word_of_the_day_when_checking_wprd_of_the_day_then_should_be_OK(self):
 
+		self.assertFalse(utils.find_word_of_the_day('aaaa', self.wotd))
 
 
 if __name__ == '__main__':
