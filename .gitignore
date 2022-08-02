@@ -5,6 +5,9 @@
 
 *.py
 tests/__pycache__
+git_add.sh
+git_add_distant.sh
+
 
 # C extensions
 *.so
