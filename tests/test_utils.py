@@ -5,9 +5,6 @@ sys.path.insert(1, '/home/Cédric/Projet_Wordle/my_wordle')
 import service_api
 import utils
 
-
-# import my_wordle.utils
-
 import warnings
 
 class TestUtilsBasicCases(unittest.TestCase):
@@ -29,6 +26,7 @@ class TestUtilsBasicCases(unittest.TestCase):
 		self.assertTrue(self.service.is_valid('bonjour'))
 
 	def test_given_the_real_word_of_the_day_when_checking_word_of_the_day_then_should_be_OK(self):
+		
 		self.assertTrue(utils.find_word_of_the_day(self.wotd, self.wotd))
 	
 	def test_given_the_real_wotd_when_checking_if_the_letters_are_at_the_good_place_compare_to_wotd_then_should_be_ok(self):
