@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-notes.py
+test_dev.py
 
 # C extensions
 *.so
