@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 import utils
 import requests
+import gestion_exception
 from datetime import date
 
 class ServiceAPI(object):
@@ -17,8 +18,6 @@ class ServiceAPI(object):
 	# def open(self):
 	# 	self.session = requests.Session
 
-
-
 	''' Recupere le mot du jour en utilisant sur l'api de dicolink (En se basant sur la date du jour)'''
 	def get_word_of_the_day(self):
 
@@ -33,10 +32,10 @@ class ServiceAPI(object):
 			status_code = response.status_code
 
 			if status_code == 200:
-				print(response.json()['mot'].upper(),len("sedition"))
 				return response.json()['mot'].upper()
 			else:
-				print('error in request', status_code, response_json)
+				raise gestion_exception.HTMLException('\nImpossible de selectionner le mot du jour. Erreur HTML', status_code)
+				# print('error in request', status_code, response_json)
 
 	''' Trouve si le mot du joueur existe dans le dictionnaire francais. Si oui, le mot est valide, si non il est invalide 
 		Utilise l'api de dicolink '''
@@ -56,5 +55,4 @@ class ServiceAPI(object):
 					return False
 				return True
 			else:
-				raise Exception("Error in request", status_code, response_json)
-				# print('error in request', status_code, response_json)
+				raise gestion_exception.HTMLException('\nLe mot propose n\'existe pas, erreur HTML', status_code)

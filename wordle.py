@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 import utils
 import service_api
+import gestion_exception
 import random
 import sys
 
@@ -20,6 +21,8 @@ def main():
 		word_of_the_day = service.get_word_of_the_day()
 	except KeyError:
 		sys.exit('Selection du mot impaaaawsible')
+	except gestion_exception.HTMLException:
+		sys.exit("Fin du programme. Attendez quelques minutes avant de relancer svp.\n")
 
 	# number = random.randint(0, len(word_list))
 	# word_of_the_day = word_list[number]
@@ -34,12 +37,13 @@ def main():
 			word_player = input("\nProposition ? ")
 		except KeyboardInterrupt:
 			sys.exit(' Interruption clavier')
+		
 		try:
 			player_word_exists = service.is_valid(word_player)
 		except ValueError:
 			sys.exit('Un ou plusieurs caractere(s) inconnus')
-		except Exception:
-			sys.exit("error a definir")
+		except gestion_exception.HTMLException:
+			sys.exit("Fin du programme. Attendez quelques minutes avant de relancer svp.\n")
 
 		while player_word_exists == False or len(word_of_the_day) != len(word_player):
 			if player_word_exists == False:
@@ -55,6 +59,8 @@ def main():
 				player_word_exists = service.is_valid(word_player)
 			except KeyError:
 				sys.exit('Erreur lors de la recherche du mot')
+			except gestion_exception.HTMLException:
+				sys.exit("Fin du programme. Attendez quelques minutes avant de relancer svp.\n")
 
 		
 		''' Si ce n'est pas le mot du jour, il faut chercher les lettres oranges/vertes'''
