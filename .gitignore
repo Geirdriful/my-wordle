@@ -3,7 +3,7 @@
 *.py[cod]
 *$py.class
 
-test_dev.py
+*.py
 tests/__pycache__
 
 # C extensions
