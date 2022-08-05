@@ -3,7 +3,7 @@
 *.py[cod]
 *$py.class
 
-*.py
+test_dev.py
 tests/__pycache__
 git_add.sh
 git_add_distant.sh
