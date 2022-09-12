@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 import utils
 import service_api
-import gestion_exception
+from gestion_exception import HTTPException
 import random
 import sys
 
@@ -21,7 +21,11 @@ def main():
 		word_of_the_day = service.get_word_of_the_day()
 	except KeyError:
 		sys.exit('Selection du mot impaaaawsible')
-	except gestion_exception.HTMLException:
+	except HTTPException as httpException:
+		# import pdb
+		# pdb.set_trace()
+		print(httpException.args[0])
+
 		sys.exit("Fin du programme. Attendez quelques minutes avant de relancer svp.\n")
 
 	# number = random.randint(0, len(word_list))
@@ -42,7 +46,10 @@ def main():
 			player_word_exists = service.is_valid(word_player)
 		except ValueError:
 			sys.exit('Un ou plusieurs caractere(s) inconnus')
-		except gestion_exception.HTMLException:
+		except HTTPException as httpException:
+		# import pdb
+		# pdb.set_trace()
+			print(httpException.args[0])
 			sys.exit("Fin du programme. Attendez quelques minutes avant de relancer svp.\n")
 
 		while player_word_exists == False or len(word_of_the_day) != len(word_player):
@@ -59,7 +66,10 @@ def main():
 				player_word_exists = service.is_valid(word_player)
 			except KeyError:
 				sys.exit('Erreur lors de la recherche du mot')
-			except gestion_exception.HTMLException:
+			except HTTPException as httpException:
+				# import pdb
+				# pdb.set_trace()
+				print(httpException.args[0])
 				sys.exit("Fin du programme. Attendez quelques minutes avant de relancer svp.\n")
 
 		
@@ -83,7 +93,7 @@ def main():
 					list_player_tmp[i] = ''
 					list_wotd_tmp[i] = ''
 
-			return_orange = utils.orange_letters(list_wotd_tmp,list_player_tmp)
+			return_orange = utils.orange_letters(word_of_the_day,word_player)
 
 			''' Affichage '''
 			for l in range(0, len(word_player)):
