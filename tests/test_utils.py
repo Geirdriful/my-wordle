@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 import unittest
 import sys
-sys.path.insert(1, '/home/Cédric/Projet_Wordle/my_wordle')
+sys.path.insert(1, '/home/cedric/my_wordle')
 import service_api
 import utils
 from unittest.mock import MagicMock
@@ -76,13 +76,19 @@ class TestUtilsErrorCases(unittest.TestCase):
 	def test_given_a_wrong_wotd_when_checking_if_the_letters_are_the_same_with_wotd_should_be_KO(self):
 		
 		l = [var for var in range(0, len(self.wotd))]
-		self.assertNotEqual('aabbccdd', utils.green_letters(self.wotd, self.wotd))
+		self.assertNotEqual(l[::-1], utils.green_letters(self.wotd, self.wotd))
 
-	def test_given_a_wrong_wotd_when_checking_if_the_letters_are_in_the_wotd_but_not_at_the_good_place_should_be_KO(self):
+	def test_given_a_player_word_when_checking_if_the_letters_are_in_the_wotd_but_not_at_the_good_place_should_be_KO(self):
+		player_word = 'VALSE'
+		wotd = 'AIGLE'
+		print(utils.orange_letters(wotd, player_word))
+		self.assertNotEqual([0,3,4], utils.orange_letters(wotd, player_word))
 
-		l = [var for var in range(0, len(self.wotd))]
-		self.assertNotEqual(l, utils.orange_letters(self.wotd, self.wotd[::-1]))
-
+	def test_given_a_player_word_with_redundant_char_when_wotd_does_not_then_should_have_only_first_letter_in_orange(self):
+		player_word = 'ELIME'
+		wotd = 'AIGLE'
+		print(utils.orange_letters(wotd, player_word))
+		self.assertNotEqual([3,4], utils.orange_letters(wotd, player_word))
 
 if __name__ == '__main__':
 	unittest.main()
