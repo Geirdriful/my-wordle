@@ -18,13 +18,9 @@ from datetime import date
 def green_letters(wotd, player_word):
 
 	list_return = list()
-	for letter in player_word:
-		try:
-			if wotd.index(letter) == player_word.index(letter):
-				list_return.append(wotd.index(letter))
-				wotd = wotd.replace(letter, '_')
-		except ValueError:
-			continue
+	for index_player_word, char_player_wotd in enumerate(player_word):
+		if char_player_wotd in wotd and char_player_wotd == wotd[index_player_word]:
+			list_return.append(index_player_word)
 
 	return list_return
 
