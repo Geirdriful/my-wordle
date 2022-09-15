@@ -12,7 +12,7 @@ class TestUtilsBasicCases(unittest.TestCase):
 	def is_valid_mock(*args, **kwargs):
 		class MockResponse:
 			def __init__(self, word, status):
-				self.wotd = word
+				self.word_of_the_day = word
 
 		return MockResponse({"mot": 'word'}, 200)
 
@@ -30,14 +30,14 @@ class TestUtilsBasicCases(unittest.TestCase):
 
 	# # Execute after each methods
 	# def tearDown(self):
-	# 	self.wotd = ""
+	# 	self.wotd = "" 
 
 	def test_given_an_existing_word_when_checking_word_validity_then_should_be_OK(self):
 
 		# self.assertTrue(self.mock_service.is_valid('bonjour'))
 		# print(valid_word.wotd['mot'])
 		valid_word = self.mock_service.is_valid('bonjour')
-		self.assertEqual(self.mock_service.is_valid('bonjour').wotd, {"mot": 'word'})
+		self.assertEqual(self.mock_service.is_valid('bonjour').word_of_the_day, {"mot": 'word'})
 
 	def test_given_the_real_word_of_the_day_when_checking_word_of_the_day_then_should_be_OK(self):
 		
