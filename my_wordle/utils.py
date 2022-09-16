@@ -17,25 +17,25 @@ from datetime import date
 
 def green_letters(wotd, player_word):
 
-	list_return = list()
+	list_indexes = list()
 	for index_player_word, char_player_wotd in enumerate(player_word):
 		if char_player_wotd in wotd and char_player_wotd == wotd[index_player_word]:
-			list_return.append(index_player_word)
+			list_indexes.append(index_player_word)
 
-	return list_return
+	return list_indexes
 
 ''' Detection des lettres oranges. Ces lettres sont presente dans le WOTD mais ne sont pas a la bonne place'''
 def orange_letters(wotd, player_word):
-	list_return = list()
+	list_indexes = list()
 
 	for index_player_word, char_player_wotd in enumerate(player_word):
 		if char_player_wotd in wotd and char_player_wotd != wotd[index_player_word]:
 			count_wotd = wotd.count(char_player_wotd)
 			count_player_word = player_word.count(char_player_wotd)
 			if count_player_word >= count_wotd and index_player_word == player_word.find(char_player_wotd):
-				list_return.append(index_player_word)
+				list_indexes.append(index_player_word)
 
-	return list_return
+	return list_indexes
 
 
 	# for index_wotd, char_wotd in enumerate(wotd):

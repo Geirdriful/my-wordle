@@ -8,13 +8,28 @@ import utils
 
 from unittest import mock
 
-class TestUtilsBasicCases(unittest.TestCase):
-	def is_valid_mock(*args, **kwargs):
-		class MockResponse:
-			def __init__(self, word, status):
-				self.word_of_the_day = word
+def get_mot_mock(*args, **kwargs):
+	class MockResponse:
+		def __init__(self, json_data, status):
+			self.json_data = json_data
+			self.status_code = status
 
-		return MockResponse({"mot": 'word'}, 200)
+		def json(self):
+			return self.json_data
+	
+	list_wrong_word = ['bonjourr', 'vendreddi']
+
+	if any(wrong_word in args[0] for wrong_word in list_wrong_word):
+		return MockResponse({"error":"pas de résultats"}, 200)
+	
+	return MockResponse({"mot": 'VENDREDI'}, 200)
+
+	# for wrong_word in list_wrong_word:
+	# 	if wrong_word in args[0]:
+	# 		return MockResponse({"error":"pas de résultats"}, 200)
+		
+
+class TestUtilsBasicCases(unittest.TestCase):
 
 	# Constructor
 	def __init__(self, *args, **kwargs):
@@ -22,8 +37,8 @@ class TestUtilsBasicCases(unittest.TestCase):
 		self.service = service_api.ServiceAPI()
 		self.wotd = 'VENDREDI'
 
-		self.mock_service = service_api.ServiceAPI()
-		self.mock_service.is_valid = mock.MagicMock(side_effect = self.is_valid_mock)
+		# self.mock_service = service_api.ServiceAPI()
+		# self.mock_service.is_valid = mock.MagicMock(side_effect = self.is_valid_mock)
 		
 	# # Execute before each methods
 	# def setUp(self):
@@ -32,12 +47,12 @@ class TestUtilsBasicCases(unittest.TestCase):
 	# def tearDown(self):
 	# 	self.wotd = "" 
 
-	def test_given_an_existing_word_when_checking_word_validity_then_should_be_OK(self):
+	@mock.patch('requests.Session.get', side_effect = get_mot_mock)
+	def test_given_an_existing_word_when_checking_word_validity_then_should_be_OK(self, mock_get):
 
-		# self.assertTrue(self.mock_service.is_valid('bonjour'))
-		# print(valid_word.wotd['mot'])
-		valid_word = self.mock_service.is_valid('bonjour')
-		self.assertEqual(self.mock_service.is_valid('bonjour').word_of_the_day, {"mot": 'word'})
+		# valid_word = self.service.is_valid('bonjour')
+		# print(valid_word)
+		self.assertTrue(self.service.is_valid('bonjour'))
 
 	def test_given_the_real_word_of_the_day_when_checking_word_of_the_day_then_should_be_OK(self):
 		
@@ -73,7 +88,8 @@ class TestUtilsErrorCases(unittest.TestCase):
 	# def tearDown(self):
 	# 	self.wotd = ""
 
-	def test_given_a_wrong_word_when_checking_word_validity_then_should_be_KO(self):
+	@mock.patch('requests.Session.get', side_effect = get_mot_mock)
+	def test_given_a_wrong_word_when_checking_word_validity_then_should_be_KO(self, mock_get):
 		self.assertFalse(self.service.is_valid('bonjourr'))
 
 	def test_given_a_wrong_word_of_the_day_when_checking_word_of_the_day_then_should_be_KO(self):
