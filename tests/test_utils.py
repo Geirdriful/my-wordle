@@ -79,7 +79,7 @@ class TestUtilsErrorCases(unittest.TestCase):
 	def __init__(self, *args, **kwargs):
 		super(TestUtilsErrorCases, self).__init__(*args, **kwargs)
 		self.service = service_api.ServiceAPI()
-		self.wotd = self.service.get_word_of_the_day()
+		self.wotd = self.service.get_word_of_the_day(self.service.api_key)
 
 	# # Execute before each methods
 	# def setUp(self):
