@@ -6,8 +6,11 @@ from datetime import date
 
 class ServiceAPI(object):
 
-	# def __init__(self):
-	# 	self.session = requests.Session()
+	def __init__(self):
+		self.session = requests.Session()
+
+		with open('/home/cedric/my_wordle/api_key.txt', 'r') as f:
+			self.api_key = f.read()
 	
 	# def close(self):
 	# 	self.session.close()
@@ -19,13 +22,16 @@ class ServiceAPI(object):
 	# 	self.session = requests.Session
 
 	''' Recupere le mot du jour en utilisant sur l'api de dicolink (En se basant sur la date du jour)'''
-	def get_word_of_the_day(self):
+	def get_word_of_the_day(self, api_key):
+	# def get_word_of_the_day(self):
 
 		today = date.today()
 		header = {
 			'Content-Type': 'application/json'
 		}
-		url = "https://api.dicolink.com/v1/mots/motdujour?date="+str(today)+"&api_key=ANvGBoV1-G7Ioi4SIix_dXPzV1y1gCDD"
+		url = f'https://api.dicolink.com/v1/mots/motdujour?date={str(today)}&api_key={api_key}'
+		# url = f'https://api.dicolink.com/v1/mots/motdujour?date={str(today)}&api_key=ANvGBoV1-G7Ioi4SIix_dXPzV1y1gCDD'
+
 
 		with requests.Session() as session:
 			response = session.get(url, headers=header)

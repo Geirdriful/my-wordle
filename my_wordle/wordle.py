@@ -18,7 +18,7 @@ def main():
 
 	''' Selection d'un mot parmi la liste '''
 	try:
-		word_of_the_day = service.get_word_of_the_day()
+		word_of_the_day = service.get_word_of_the_day(service.api_key)
 	except KeyError:
 		sys.exit('Selection du mot impaaaawsible')
 	except HTTPException as httpException:
@@ -27,9 +27,6 @@ def main():
 		print(httpException.args[0])
 
 		sys.exit("Fin du programme. Attendez quelques minutes avant de relancer svp.\n")
-
-	# number = random.randint(0, len(word_list))
-	# word_of_the_day = word_list[number]
 	
 	print("Selection d'un mot de " + str(len(word_of_the_day)) + " lettres ...")
 	list_letter_of_the_day = [char for char in word_of_the_day]
@@ -75,25 +72,13 @@ def main():
 		
 		''' Si ce n'est pas le mot du jour, il faut chercher les lettres oranges/vertes'''
 		if not utils.find_word_of_the_day(word_player, word_of_the_day):
-			''' Découpage du mot du joueur et ajout dans une liste '''
-			list_letter_of_the_player = list()
-			for index in range(0, len(word_of_the_day)):
-				list_letter_of_the_player.append(word_player[index].upper())
 				
-
 			''' Detection of green letters '''
-			return_green = utils.green_letters(list_letter_of_the_day, list_letter_of_the_player)
+			return_green = utils.green_letters(word_of_the_day, word_player.upper())
 
 			''' Detection of orange letters '''
-			list_wotd_tmp = list_letter_of_the_day.copy()
-			list_player_tmp = list_letter_of_the_player.copy()
 
-			if return_green:
-				for i in return_green:
-					list_player_tmp[i] = ''
-					list_wotd_tmp[i] = ''
-
-			return_orange = utils.orange_letters(word_of_the_day,word_player)
+			return_orange = utils.orange_letters(word_of_the_day,word_player.upper())
 
 			''' Affichage '''
 			for l in range(0, len(word_player)):
