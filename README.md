@@ -61,12 +61,17 @@ git pull git@github.com:Geirdriful/my-wordle.git
 ```
 
 Etape 4:
+Le jeu nécéssite l'utilisation d'une clé API personnelle. 
+Cette clé peut etre récuperée en en effectuant la demande auprés de Dicolink (lien disponible dans la partie "Documentations externes".
+Une fois votre cle récupérée, il est nécéssaire de placer cette clé dans un fichier texte "api_key.txt" contant uniquement la clé. Ce fichier est ensuite ignoré via le .gitignore pour ne pas etre partagé ici.
+
+Etape 5:
 Une fois le téléchargement du projet terminé, déplacez vous dans le répertoire du projet puis lancez la commande suivante pour exécuter le jeu :
 ```
 ./wordle.py
 ```
 
-Etape 5:
+Etape 6:
 Si tout est OK, vous devriez avoir quelque chose qui ressemble à cela :
 
 ![image](https://user-images.githubusercontent.com/66006065/159884868-94b5250e-22b5-431b-9b25-63a195a1169d.png)
