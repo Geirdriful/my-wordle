@@ -24,8 +24,7 @@ def main():
 	except HTTPException as httpException:
 		# import pdb
 		# pdb.set_trace()
-		print(httpException.args[0])
-
+		print(httpException.args[0], httpException.args[1])
 		sys.exit("Fin du programme. Attendez quelques minutes avant de relancer svp.\n")
 	
 	print("Selection d'un mot de " + str(len(word_of_the_day)) + " lettres ...")
@@ -40,13 +39,13 @@ def main():
 			sys.exit(' Interruption clavier')
 		
 		try:
-			player_word_exists = service.is_valid(word_player)
+			player_word_exists = service.is_valid(word_player, service.api_key)	
 		except ValueError:
 			sys.exit('Un ou plusieurs caractere(s) inconnus')
 		except HTTPException as httpException:
 		# import pdb
 		# pdb.set_trace()
-			print(httpException.args[0])
+			print(httpException.args[0], httpException.args[1])
 			sys.exit("Fin du programme. Attendez quelques minutes avant de relancer svp.\n")
 
 		while player_word_exists == False or len(word_of_the_day) != len(word_player):
@@ -60,13 +59,13 @@ def main():
 				sys.exit('Interruption clavier')
 
 			try:
-				player_word_exists = service.is_valid(word_player)
+				player_word_exists = service.is_valid(word_player, service.api_key)
 			except KeyError:
 				sys.exit('Erreur lors de la recherche du mot')
 			except HTTPException as httpException:
 				# import pdb
 				# pdb.set_trace()
-				print(httpException.args[0])
+				print(httpException.args[0], httpException.args[1])
 				sys.exit("Fin du programme. Attendez quelques minutes avant de relancer svp.\n")
 
 		
