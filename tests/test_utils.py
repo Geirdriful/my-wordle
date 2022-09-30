@@ -1,13 +1,12 @@
 #! /usr/bin/env python3
-import unittest
 import sys
+import unittest
+from unittest import mock
 sys.path.insert(1, '/home/cedric/my_wordle')
 import service_api
 import utils
 import gestion_exception
-# from unittest.mock import MagicMock
 
-from unittest import mock
 
 def get_mot_mock(*args, **kwargs):
 	class MockResponse:
@@ -26,7 +25,7 @@ def get_mot_mock(*args, **kwargs):
 	return MockResponse({"mot": 'VENDREDI'}, 200)
 
 
-def get_mot_du_jour_mock(*args, **kwargs):
+def get_mot_du_jour_mock_Basic_Cases(*args, **kwargs):
 	class MockResponse:
 		def __init__(self, json_data, status):
 			self.json_data = json_data
@@ -35,11 +34,20 @@ def get_mot_du_jour_mock(*args, **kwargs):
 		def json(self):
 			return self.json_data
 
+	return MockResponse({'mot': 'FASTE'}, 200)
 
-	if 'DDD' in args[0]:
-		raise gestion_exception.HTTPException('\nImpossible de selectionner le mot du jour. Erreur HTTP', 418)
-	else:
-		return MockResponse({'mot': 'FASTE'}, 200)
+
+def get_mot_du_jour_mock_Error_Cases(*args, **kwargs):
+	class MockResponse:
+		def __init__(self, json_data, status):
+			self.json_data = json_data
+			self.status_code = status
+
+		def json(self):
+			return self.json_data
+
+	raise gestion_exception.HTTPException('\nImpossible de selectionner le mot du jour. Erreur HTTP', 418)
+
 
 class TestUtilsBasicCases(unittest.TestCase):
 
@@ -59,19 +67,14 @@ class TestUtilsBasicCases(unittest.TestCase):
 	# def tearDown(self):
 	# 	self.wotd = "" 
 
-	@mock.patch('requests.Session.get', side_effect = get_mot_mock)
-	def test_given_an_existing_word_when_checking_word_validity_then_should_be_OK(self, mock_get):
-
-		# valid_word = self.service.is_valid('bonjour')
-		# print(valid_word)
+	@mock.patch('requests.Session.get', side_effect=get_mot_mock)
+	def test_given_an_existing_word_when_checking_word_validity_then_should_be_OK(self,mock_get):
 		self.assertTrue(self.service.is_valid('bonjour', self.service.api_key))
 
 	def test_given_the_real_word_of_the_day_when_checking_word_of_the_day_then_should_be_OK(self):
-		
 		self.assertTrue(utils.find_word_of_the_day(self.wotd, self.wotd))
 	
 	def test_given_the_real_wotd_when_checking_if_the_letters_are_at_the_good_place_compare_to_wotd_then_should_be_ok(self):
-		
 		l = list(range(len(self.wotd)))
 		self.assertEqual(l, utils.green_letters(self.wotd, self.wotd))
 
@@ -85,8 +88,8 @@ class TestUtilsBasicCases(unittest.TestCase):
 		wotd = 'AIGLE'
 		self.assertEqual([0, 1, 2], utils.orange_letters(wotd, player_word))
 
-	@mock.patch('requests.Session.get', side_effect = get_mot_du_jour_mock)
-	def test_given_nothing_when_getting_word_of_the_day_then_should_return_a_valid_word(self, mock_get):
+	@mock.patch('requests.Session.get',side_effect=get_mot_du_jour_mock_Basic_Cases)
+	def test_given_nothing_when_get_word_of_the_day_then_should_return_a_valid_word(self, mock_get):
 		wotd = 'FASTE'
 		self.assertEqual(wotd, self.service.get_word_of_the_day(self.service.api_key))
 
@@ -107,7 +110,7 @@ class TestUtilsErrorCases(unittest.TestCase):
 	# def tearDown(self):
 	# 	self.wotd = ""
 
-	@mock.patch('requests.Session.get', side_effect = get_mot_mock)
+	@mock.patch('requests.Session.get', side_effect=get_mot_mock)
 	def test_given_a_wrong_word_when_checking_word_validity_then_should_be_KO(self, mock_get):
 		self.assertFalse(self.service.is_valid('bonjourr', self.service.api_key))
 
@@ -130,7 +133,7 @@ class TestUtilsErrorCases(unittest.TestCase):
 		wotd = 'AIGLE'
 		self.assertNotEqual([0,1,2,4], utils.orange_letters(wotd, player_word))
 
-	@mock.patch('requests.Session.get', side_effect = get_mot_du_jour_mock)
+	@mock.patch('requests.Session.get', side_effect = get_mot_du_jour_mock_Error_Cases)
 	def test_given_nothing_when_getting_word_of_the_day_then_should_raise_an_exception(self, get_mock):
 		with self.assertRaises(gestion_exception.HTTPException): 
 			self.service.get_word_of_the_day(self.service.api_key + 'D')
