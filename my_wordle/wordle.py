@@ -2,8 +2,8 @@
 import utils
 import service_api
 from gestion_exception import HTTPException
-import random
 import sys
+
 
 def main():
 

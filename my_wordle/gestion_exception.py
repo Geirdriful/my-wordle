@@ -1,7 +1,4 @@
 #! /usr/bin/env python3
-import utils
-import requests
-from datetime import date
 
 class HTTPException(Exception):
 
