@@ -49,3 +49,4 @@ class ServiceAPI(object):
                 return True
             else:
                 raise gestion_exception.HTTPException('\nLe mot propose n\'existe pas, erreur HTML', status_code)
+	
