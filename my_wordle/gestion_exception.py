@@ -2,5 +2,5 @@
 
 class HTTPException(Exception):
 
-	def __init__(self, message, value):
-		super().__init__(message, value)
+    def __init__(self, message, value):
+        super().__init__(message, value)
